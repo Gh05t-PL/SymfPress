@@ -1,0 +1,72 @@
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-pack ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+
+templates/news/
+
+templates/profile/
+
+templates/visitor_handler/
+
+templates/base\.html\.twig
+
+public/piwik/
+public/js/
+
+public/A\.txt
+
+public/ehehehe\.jpg
+
+public/ghost-logo-2\.svg
+
+public/ghost-logo-3\.svg
+
+public/Ghost\.svg
+
+public/img\.jpg
+
+public/img2\.jpg
+
+public/img3\.jpg
+
+public/imga\.jpg
+
+public/menu-icon\.svg
+
+public/noimage\.jpg
+
+public/style\.css
+
+public/Untitled-3\.html
+
+src/Controller/GalleryControlle2r\.php\.txt
+
+src/Controller/services\.txt
+
+src/Controller/Untitled-4\.php\.txt
+
+src/Controller/Untitled-6\.js
+
+src/Controller/Untitled-9\.txt
+
+\.idea/

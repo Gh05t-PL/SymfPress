@@ -1,0 +1,242 @@
+{% extends 'cockpit/base.html.twig' %}
+
+{% block title %}Cockpit - Add Posts{% endblock %}
+
+{% block content %}
+<style>
+        body {
+            font-family: "Segoe UI","Font Awesome 5 Free";
+        }
+    .span-1h {
+        grid-column: span 1;
+    }
+    .span-2h {
+        grid-column: span 2;
+    }
+    .span-3h {
+        grid-column: span 3;
+    }
+    .span-4h {
+        grid-column: span 4;
+    }
+
+    .span-1v {
+        grid-row: span 1;
+    }
+    .span-2v {
+        grid-row: span 2;
+    }
+    .span-3v {
+        grid-row: span 3;
+    }
+    .span-4v {
+        grid-row: span 4;
+    }
+
+    .ex {
+        /*grid-column: 1/-1;*/
+       /* padding: 5px 15px;*/
+    }
+    .ex > textarea {
+        width: 100%;
+        resize: vertical;
+        box-sizing: border-box;
+    }
+    .ex > input[type=text] {
+        box-sizing: border-box;
+        width: 100%;
+        font-size: 1.8em;
+        padding: 6px 2px;
+        border-radius: 3px;
+        border: #d3d3d4 1px solid;
+    }
+    #cke_editor {
+        border-radius: 3px;
+    }
+    .button {
+        all: unset;
+        padding: 7px 13px;
+        border-radius: 5px;
+        border: 1px rgb(23, 194, 23) solid;
+        background: rgb(29, 248, 29);
+        color: white;
+        cursor: pointer;
+    }
+    .button:hover {
+        background: rgb(16, 218, 16);
+    }
+    .button:active {
+        background: rgb(14, 180, 14);
+    }
+
+    .box-option {
+        background: #ffffff;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    .box-option .box-header {
+        /*background: #b1b1b1;*/
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        padding: 15px 15px;
+    }
+    .box-header h3 {
+        margin: 0;
+    }
+    .box-header h3::after {
+        float: right;
+        font-family: "Segoe UI","Font Awesome 5 Free";
+        content: "\f107";
+    }
+    .box-option .box-body {
+        padding: 0 15px;
+        border-top: #d3d3d4 1px solid;
+    }
+    .box-option .box-bottom {
+        padding: 15px 15px;
+        border-top: #d3d3d4 1px solid;
+    }
+
+    .input-group {
+        display: flex;
+    }
+    .input-group-suffix:nth-child(1) {
+        background: none;
+        display: block;
+        border: 1px solid #e1e5eb;
+        /* box-sizing: border-box; */
+        /* height: 100%; */
+        padding: 5px;
+        flex: 1;
+    }
+    .input-group-suffix:nth-child(2) {
+        background: none;
+        display: block;
+        border: 1px solid #e1e5eb;
+        padding: 9px 13px;
+        margin-left: -1px;
+    }
+    .input-group-prefix:nth-child(2) {
+        background: none;
+        border: 1px solid #e1e5eb;
+        /* box-sizing: border-box; */
+        /* height: 100%; */
+        padding: 5px;
+        display: block;
+    }
+    .input-group-prefix:nth-child(1) {
+        background: none;
+        border: 1px solid #e1e5eb;
+        padding: 9px 13px;
+        margin-right: -1px;
+        display: block;
+        flex: 1;
+    }
+    .center {
+        align-items: center;
+        justify-items: center;
+        display: grid;
+    }
+    .box-body > ul {
+        list-style: none;
+        padding: 0;
+    }
+    li > p {
+        margin: 0;
+    }
+    li {
+        margin-bottom: 9px;
+    }
+    .whole {
+        width: 100%;
+    }
+
+    .cke_bottom, .cke_top {
+        background: none;
+    }
+    #area{
+        height: 100%;
+      }
+
+</style>
+
+<div class="ex box span-2h span-1v">
+    <h2>Tytuł</h2>
+    <input type="text" name="title" id="title" placeholder="Tytuł" spellcheck="true" autocomplete="off">
+    <h2>Tekst</h2>
+    <div id="area">
+        <textarea name="text" id="editor" onchange="alert('aaa')"></textarea>
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        
+    </div>
+    
+</div>
+<div class="span-1h span-2v">
+    <div class="box-option span-1h span-1v">
+        <div class="box-header">
+            <h3>Opcje</h3>
+        </div>
+        <div class="box-body">
+            <ul style="list-style: none;">
+                    <li style="display: flex;"><p><span style="font-weight: 600;"><i class="far fa-calendar-alt"></i> Planowanie: </span><i>Teraz</i></p> <p id="calendar-input" style="margin-left: auto; color:rgb(21, 80, 243);">Edytuj</p></li>
+                    <li style="display: flex;"><p><span style="font-weight: 600;"><i class="fas fa-eye"></i> Widoczność: </span><i>Publiczna</i></p> <p id="calendar-input" style="margin-left: auto; color:rgb(21, 80, 243);">Edytuj</p></li>
+                    <li style="display: flex;"><p><span style="font-weight: 600;"><i class="fas fa-user"></i> Autor: </span><i>Ty</i></p></li>
+                
+            </ul>
+        </div>
+        <div class="box-bottom">
+            <button class="button">Publikuj</button>
+        </div>
+    </div>
+    
+    <div class="box-option span-1h span-1v">
+        <div class="box-header">
+            <h3>Kategorie</h3>
+        </div>
+        <div class="box-body">
+            <ul style="list-style: none;">
+                <li><input type="checkbox" name="category" id="Programowanie"><label for="Programowanie">Programowanie</label></li>
+                <li><input type="checkbox" name="category" id="Gadżety"><label for="Gadżety">Gadżety</label></li>
+                <li><input type="checkbox" name="category" id="Blog"><label for="Blog">Blog</label></li>
+                <li><input type="checkbox" name="category" id="Gry"><label for="Gry">Gry</label></li>
+            </ul>
+        </div>
+        <div class="box-bottom center">
+            <div class="input-group whole"><input class="input-group-suffix" type="text" name="" id="" placeholder="Nowa kategoria"><button class="input-group-suffix"><i class="fas fa-plus"></i></button></div>
+        </div>
+    </div>
+    <div class="box-option span-1h span-1v">
+        <div class="box-header">
+            <h3>Tagi</h3>
+        </div>
+        <div class="box-body">
+            <p>Programowanie, Gry, Super, CSS</p>
+        </div>
+        <div class="box-bottom center">
+            <div class="input-group whole"><input class="input-group-suffix" type="text" name="" id="" placeholder="Dodaj Tag"><button class="input-group-suffix"><i class="fas fa-plus"></i></button></div>
+        </div>
+    </div>
+</div>
+
+<div class="box span-3h span-3v">
+       {#  {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }} #}
+        <div class="output"></div>
+</div>
+<script>
+    CKEDITOR.replace("editor")
+
+    $(function(){
+        $('.ckeditor').each(function(e){
+            CKEDITOR.replace(this.id);
+        });
+    });
+
+    CKEDITOR.instances.editor.on('change', function(evt) { 
+        document.querySelector(".output").innerHTML = evt.editor.getData();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Ghost-Web | Blog z pasją{% endblock %}</title>
+
+    <!-- Main JQUERY library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- highlight.js library -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs2015.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/FontAwesome.otf"> -->
+    <!-- FONTS | GOOGLE -->
+    <link href="https://fonts.googleapis.com/css?family=Markazi+Text|Merriweather" rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <!-- COOKIES -->
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+
+    <!-- CKEditor -->
+    <script src="/js/ckeditor/ckeditor.js"></script>
+
+    {% block stylesheets %}
+    <style>
+          /*  @font-face {
+                font-family: FontAwesome;
+                src: url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/FontAwesome.otf);
+            }*/
+        html, body {
+            background: #F3F3F3;
+            margin: 0;
+            font-family: "Segoe UI","Font Awesome 5 Free";
+        }
+
+        .side-nav {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: #151515;
+            box-shadow: grey 23px 0 24px 33px;
+            text-align: left;
+            transition: 0.5s ease;
+            display: none;
+            white-space: nowrap;
+            z-index: 2;
+        }
+        
+        .side-nav-close {
+            font-size: 19px;
+            position: absolute;
+            left: 11px;
+            padding: 3px;
+            margin-top: 8px;
+        }
+        
+        .side-nav > .side-nav-container p a, .side-nav a {
+            color: white;
+            text-decoration: none;
+            margin: 16px 0;
+            display: block;
+            font-size: 20px;
+        }
+        
+        .side-nav-container {
+            margin-top: 45px;
+            padding-left: 45px;
+        }
+
+        .wrapper {
+            display: grid;
+            grid-template-rows: 46px 1fr;
+            grid-template-columns: 90px minmax(400px,1fr) 90px;
+            grid-gap: 22px;
+        
+            margin: 8px;
+        }
+
+        .header {
+            background: #EBEBEB;
+            -webkit-box-shadow: 0px 0px 4px 0px rgb(150, 147, 150);
+            -moz-box-shadow: 0px 0px 4px 0px rgb(150, 147, 150);
+            box-shadow: 0px 0px 4px 0px rgb(150, 147, 150);
+        
+            grid-column: 1/-1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            z-index: 1;
+            position: sticky;
+            top: 5px;
+        }
+        
+        .header-logo {
+            height: 90%;
+            align-self: center;
+            margin-left: 6px;
+        }
+        
+        .header-menu-icon {
+            height: 90%;
+            align-self: center;
+            justify-self: end;
+        }
+
+        .main {
+            display: grid;
+        
+            grid-column: 2/3;
+            grid-gap: 50px 30px;
+        
+            grid-template-columns: 1fr 1fr 1fr;
+            /*background: #ffffff;*/
+            border-radius: 4px;
+            min-height: 400px;
+        }
+
+        .box {
+            background: #ffffff;
+            border-radius: 4px;
+            padding: 15px 15px;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    <div class="side-nav">
+        <a href="javascript:void(0)" class="side-nav-close"><i class="fas fa-times"></i></a>
+        <div class="side-nav-container">
+            <p><a><i class="fas fa-tachometer-alt"></i> Dashboard</a></p>
+            <p><a href="/cockpit/posts"><i class="far fa-newspaper"></i> Posty</a></p>
+            <p><a><i class="far fa-comments"></i> Komentarze</a></p>
+            <ul style="color: white; font-size: 22px; padding: 0; list-style: none;">
+                <a><i class="far fa-comments"></i> Komentarze</a>
+                <div class="submenu-list" style="font-size: 18px; color: lightslategrey; font-weight: 600; background:beige;">
+                    <li><i class="far fa-comments"></i> Moje</li>
+                    <li><i class="far fa-comments"></i> Twoje</li>
+                </div>
+                
+            </ul>
+            <br>
+            <p><a href="/"><i class="fas fa-door-open"></i> Wyjdź</a></p>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="header">
+            <!-- <img class="header-logo" src="/ghost-logo-3.svg" alt=""> -->
+            <div></div>
+            <img class="header-menu-icon" src="/menu-icon.svg" alt="">
+        </div>
+        <div class="main">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+
+
+    {% block javascripts %}
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        document.querySelector(".header-menu-icon").addEventListener("click", (event) => {
+            sideNav = document.querySelector(".side-nav")
+            
+            sideNav.style.display = "block"
+            setTimeout(() => {sideNav.style.width = "230px"},20)
+            
+        })
+
+        document.querySelector(".side-nav-close").addEventListener("click", (event) => {
+            sideNav = document.querySelector(".side-nav")
+            
+            sideNav.style.width = "0"
+            
+            setTimeout(() => {sideNav.style.display = "none"},500)
+            
+        })
+
+        $.ajax({
+            method: "POST",
+            url: "/visitor/handler",
+            data: { jsonData: JSON.stringify(document.location) }
+        })
+    </script>
+    {% endblock %}
+</body>
+</html>

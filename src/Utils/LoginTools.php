@@ -25,13 +25,11 @@ class LoginTools {
         return false;
     }
 
-    function getAccess(Session $session)
+    function getAccess()
     {
-        $user = $this->em->getRepository(Users::class)->find($session->get("user")->id);
+        $user = $this->em->getRepository(Users::class)->find($this->session->get("user")->id);
 
-        $access = $user->getAccess();
-
-        return $access;
+        return $user->getAccess();;
     }
 
 }
